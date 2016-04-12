@@ -54,6 +54,16 @@ class pgpool::config {
     default  => '/etc/sysconfig',
   }
 
+  if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '6' {
+    file_line {'PGPOOLUSER':
+      ensure  => present,
+      path    => '/etc/init.d/pgpool',
+      line    => "PGPOOLUSER=$pgpool_service_user",
+      match   => 'PGPOOLUSER=',
+      notify  => Service['pgpool'],
+    }
+  }
+
   $pgpool_sysconfig_file = "${defaults_dir}/${::pgpool::service::pgpool_service_name}"
   $pgpool_config_file = "${config_dir}/pgpool.conf"
   $pool_passwd_file = "${config_dir}/pool_passwd"
