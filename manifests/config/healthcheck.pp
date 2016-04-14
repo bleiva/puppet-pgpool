@@ -12,6 +12,10 @@
 #  Integer. The time to wait on a health check.
 #  Defaults to <tt>20</tt>.
 #
+# [*health_check_database*]
+#  String. The database name to perform health check. The default is '', which tries "postgres" database first, then "template1".
+#  Defaults to <tt>''</tt>.
+#
 # [*health_check_user*]
 #  String. The postgresql user to run the health check as.
 #  Defaults to <tt>nobody</tt>.
@@ -46,6 +50,7 @@
 class pgpool::config::healthcheck (
   $health_check_period      = 5,
   $health_check_timeout     = 20,
+  $health_check_database    = '',
   $health_check_user        = 'nobody',
   $health_check_password    = '',
   $health_check_max_retries = 0,
@@ -55,6 +60,7 @@ class pgpool::config::healthcheck (
   $healthcheck_config = {
     'health_check_period'      => { value => $health_check_period },
     'health_check_timeout'     => { value => $health_check_timeout },
+    'health_check_database'    => { value => $health_check_database },
     'health_check_user'        => { value => $health_check_user },
     'health_check_password'    => { value => $health_check_password },
     'health_check_max_retries' => { value => $health_check_max_retries },

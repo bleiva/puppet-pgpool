@@ -35,6 +35,7 @@ class pgpool::service {
   }
 
   $pgpool_service_name = $::pgpool::service_name_real
+  $pgpool_service_user = $::pgpool::service_user
 
   service { 'pgpool':
     ensure => $::pgpool::service_ensure_real,

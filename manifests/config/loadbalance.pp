@@ -23,6 +23,13 @@
 #   String. Comma seperate list of function names that update the DB.
 #   Defaults to <tt>''</tt>.
 #
+# [*database_redirect_preference_list*]
+#   String. You can set "database name:node id" pair to specify the node id when connecting to the database. 
+#   Defaults to <tt>''</tt>.
+#
+# === Variables
+#
+#
 # === Variables
 #
 # N/A
@@ -38,18 +45,19 @@
 # Alex Schultz <aschultz@next-development.com>
 #
 class pgpool::config::loadbalance (
-  $load_balance_mode          = 'off',
-  $ignore_leading_white_space = 'on',
-  $white_function_list        = '',
-  $black_function_list        = 'currval,lastval,nextval,setval'
-
+  $load_balance_mode                  = 'off',
+  $ignore_leading_white_space         = 'on',
+  $white_function_list                = '',
+  $black_function_list                = 'currval,lastval,nextval,setval',
+  $database_redirect_preference_list  = '',
 ) {
 
   $loadbalance_config = {
-    'load_balance_mode'          => { value => $load_balance_mode },
-    'ignore_leading_white_space' => { value => $ignore_leading_white_space },
-    'white_function_list'        => { value => $white_function_list },
-    'black_function_list'        => { value => $black_function_list },
+    'load_balance_mode'                   => { value => $load_balance_mode },
+    'ignore_leading_white_space'          => { value => $ignore_leading_white_space },
+    'white_function_list'                 => { value => $white_function_list },
+    'black_function_list'                 => { value => $black_function_list },
+    'database_redirect_preference_list'   => { value => $database_redirect_preference_list },
   }
 
   $loadbalance_defaults = {
